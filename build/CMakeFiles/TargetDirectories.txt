@@ -1,3 +1,0 @@
-X:/Side projects/Platformer/build/CMakeFiles/platformer.dir
-X:/Side projects/Platformer/build/CMakeFiles/edit_cache.dir
-X:/Side projects/Platformer/build/CMakeFiles/rebuild_cache.dir
