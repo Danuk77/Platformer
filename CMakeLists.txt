@@ -5,7 +5,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Specify the source file locations
 file(GLOB SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB MODELS ${CMAKE_CURRENT_SOURCE_DIR}/src/models/*.cpp)
-set(SOURCES ${SRC} ${MODELS})
+file(GLOB DEPENDENCIES ${CMAKE_CURRENT_SOURCE_DIR}/src/dep/*.cpp)
+file(GLOB LIBS ${CMAKE_CURRENT_SOURCE_DIR}/lib/*.a)
+set(SOURCES ${SRC} ${MODELS} ${DEPENDENCIES})
 
 add_executable(platformer ${SOURCES})
 
@@ -18,5 +20,5 @@ elseif(NOT ${ASSIMP_FOUND})
   message("Coult not find package Assimp")
 else()
   target_include_directories(platformer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${OPENGL_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIRS})
-  target_link_libraries(platformer PRIVATE ${OPENGL_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3.lib assimp::assimp) 
+  target_link_libraries(platformer PRIVATE ${OPENGL_LIBRARIES} ${LIBS} assimp::assimp) 
 endif()

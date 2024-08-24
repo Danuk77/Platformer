@@ -1,23 +1,5 @@
 #include <window.hpp>
 
-// 
-// /*
-// * Create a game window
-// */
-// GLFWwindow *create_window(){
-//   if(!glfwInit()){
-//     std::cout << "Unable to initialisae GLFW" << std::endl;
-//     return nullptr;
-//   }
-//   return nullptr;
-// }
-
-// Callback function to handle the window resizing.
-void framebuffer_size_callback(GLFWwindow *window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
 // Initialises GLFW and GLAD.
 GLFWwindow *create_window()
 {
@@ -27,12 +9,9 @@ GLFWwindow *create_window()
         return nullptr;
     }
 
-    // Specify the OpenGL vejrsions
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    configure_opengl_version();
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "Engine", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "Platformer", nullptr, nullptr);
 
     if (window == nullptr)
     {
@@ -58,4 +37,17 @@ GLFWwindow *create_window()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     return window;
+}
+
+void configure_opengl_version(){
+  // Specify the OpenGL versions
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+}
+
+// Callback function to handle the window resizing.
+void framebuffer_size_callback(GLFWwindow *window, int width, int height)
+{
+    glViewport(0, 0, width, height);
 }
