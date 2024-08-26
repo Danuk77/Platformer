@@ -1,6 +1,7 @@
 #pragma once
-#include <models/shader.hpp>
 #include <models/sprite.hpp>
+#include <models/shader.hpp>
+#include <file_reader.hpp>
 #include <unordered_map>
 #include <models/shader_program_config.hpp>
 
@@ -9,10 +10,10 @@ public:
   Gamemanager(){};
 
   static void load_shader(ShaderProgramConfiguration shader_program_configuration);
-  static void load_sprite(const char *sprite_path);
+  static void load_sprite(const char *sprite_path, std::string sprite_name);
 
   static Shader get_shader(std::string shader_name);
-  static Sprite get_sprite();
+  static Sprite get_sprite(std::string sprite_name);
   
 private:
   static std::unordered_map<std::string, Sprite> loaded_sprites;

@@ -25,9 +25,10 @@ std::string read_shader_file(const char *shader_path) {
 
 SpriteInformation read_sprite_image(const char *sprite_path) {
   SpriteInformation sprite_information;
-  stbi_load(sprite_path, &sprite_information.sprite_width,
-            &sprite_information.sprite_height,
-            &sprite_information.number_of_channels, 0);
+  sprite_information.sprite_data =
+      stbi_load(sprite_path, &sprite_information.sprite_width,
+                &sprite_information.sprite_height,
+                &sprite_information.number_of_channels, 0);
 
   check_sprite_loading_errors(sprite_information, sprite_path);
   sprite_information.sprite_colour_format =
