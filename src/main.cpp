@@ -1,9 +1,9 @@
 #define GLFW_USE_WIN32
-#include <iostream>
-#include <window.hpp>
+#include <models/gamemanager.hpp>
 #include <platformer.hpp>
+#include <window.hpp>
 
-int main(){
+int main() {
   GLFWwindow *game_window = create_window();
   game_loop(game_window);
 
