@@ -1,3 +1,4 @@
+#include "models/scene.hpp"
 #include <models/shader.hpp>
 #include <models/gamemanager.hpp>
 #include <stdexcept>
@@ -5,6 +6,8 @@
 
 std::unordered_map<std::string, Sprite> Gamemanager::loaded_sprites;
 std::unordered_map<std::string, Shader> Gamemanager::loaded_shaders;
+unsigned int Gamemanager::current_shader = 0;
+Scene Gamemanager::current_scene = Scene();
 
 void Gamemanager::load_shader(
     ShaderProgramConfiguration shader_program_configuration) {
@@ -47,4 +50,12 @@ Sprite Gamemanager::get_sprite(std::string sprite_name){
 
   Sprite sprite = loaded_sprites[sprite_name];
   return sprite;
+}
+
+void Gamemanager::render_current_scene(){
+  current_scene.render();
+}
+
+void Gamemanager::change_scene(Scene new_scene){
+  //TODO: Implement
 }

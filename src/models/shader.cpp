@@ -1,3 +1,6 @@
+#include "glm/gtc/type_ptr.hpp"
+#include "models/gamemanager.hpp"
+#include "models/sprite_information.hpp"
 #include <models/shader.hpp>
 #include <stdexcept>
 /**
@@ -14,8 +17,6 @@ Shader::Shader(const char *vertex_shader_code, const char *fragment_shader_code)
   glDeleteShader(vertex_shader);
   glDeleteShader(fragment_shader);
 }
-
-
 
 unsigned int Shader::compile_shader(const char *&shader_code, shader_type shader_type){
   unsigned int shader; 
@@ -70,4 +71,36 @@ void Shader::check_shader_linking_errors(){
     error_message.append(linking_logs);
     throw std::runtime_error(error_message);
   }
+}
+
+void Shader::set_matrix_4(std::string matrix_name, glm::mat4 matrix) const{
+  if(Gamemanager::current_shader != shader_program_id){
+    this->use();
+  }
+  
+  auto uniform_location = glGetUniformLocation(shader_program_id, matrix_name.c_str());
+  glUniformMatrix4fv(uniform_location, 1, GL_FALSE, glm::value_ptr(matrix)); 
+}
+
+void Shader::set_vector_3_float(std::string vector_name, glm::vec3 vector) const{
+  if(Gamemanager::current_shader != shader_program_id){
+    this->use();
+  }
+
+  auto uniform_location = glGetUniformLocation(shader_program_id, vector_name.c_str());
+  glUniform3f(uniform_location, vector.x, vector.y, vector.z);
+}
+
+void Shader::set_int(std::string integer_name, unsigned int integer) const{
+  if(Gamemanager::current_shader != shader_program_id){
+    this->use();
+  }
+
+  auto uniform_location = glGetUniformLocation(shader_program_id, integer_name.c_str());
+  glUniform1i(uniform_location, integer);
+}
+
+void Shader::use() const{
+  Gamemanager::current_shader = shader_program_id;
+  glUseProgram(shader_program_id);
 }

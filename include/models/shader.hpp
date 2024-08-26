@@ -13,6 +13,12 @@ class Shader{
 public:
   Shader(){};
   Shader(const char *vertex_shader_code, const char *fragment_shader_code);
+
+  void set_matrix_4(std::string matrix_name, glm::mat4 matrix) const;
+  void set_vector_3_float(std::string vector_name, glm::vec3 vector) const;
+  void set_int(std::string integer_name, unsigned int integer) const;
+
+  void use() const;
 private:
   unsigned int shader_program_id; 
   unsigned int compile_shader(const char *&shader_code, shader_type shader_type);

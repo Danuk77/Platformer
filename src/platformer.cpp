@@ -1,10 +1,11 @@
-#include "GLFW/glfw3.h"
+#include "models/gamemanager.hpp"
 #include <platformer.hpp>
 
 void game_loop(GLFWwindow *game_window){
   while(!glfwWindowShouldClose(game_window)){
     clear_screen();  
     glfwSwapBuffers(game_window);
+    Gamemanager::render_current_scene();
     glfwPollEvents();
   }
 }

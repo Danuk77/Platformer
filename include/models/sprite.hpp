@@ -5,7 +5,7 @@ class Sprite{
 public:
   Sprite(){};
   Sprite(SpriteInformation loaded_sprite_information);
+  void bind() const;
 private:  
-  static unsigned int VAO, VBO;
   unsigned int sprite_id;
 };
