@@ -75,7 +75,7 @@ void GameObject::initialise_model_matrix(){
 
 void GameObject::render(){
   //TODO: Temporary value (for testing), maybe move into header as a permanent variable
-  glm::vec3 sprite_color = glm::vec3(1.0f, 0.0f, 0.0f);
+  glm::vec3 sprite_color = glm::vec3(1.0f, 1.0f, 1.0f);
 
   shader_program.use();
   shader_program.set_matrix_4("model_matrix", model_matrix);
