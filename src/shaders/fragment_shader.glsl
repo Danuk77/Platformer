@@ -7,6 +7,6 @@ uniform sampler2D sprite;
 uniform vec3 sprite_color;
 
 void main(){
-  output_color = vec4(sprite_color, 1.0f) * texture(sprite, texture_coordinates);
-  //output_color = vec4(1.0f, 0.5f, 1.0f, 1.0f);
+  output_color = texture(sprite, texture_coordinates);
+  // output_color = vec4(sprite_color, 1.0f) * texture(sprite, texture_coordinates);
 }

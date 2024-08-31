@@ -7,7 +7,7 @@
 
 int main() {
   GLFWwindow *game_window = create_window();
-  Gamemanager::load_sprite("X:\\Side projects\\Platformer\\sprites\\read_sprites\\00_char_blue.png", "test_sprite");
+  Gamemanager::load_sprite("X:\\Side projects\\Platformer\\sprites\\read_sprites\\01_char_blue.png", "test_sprite");
   ShaderProgramConfiguration config;
   config.vertex_shader_path = "X:\\Side projects\\Platformer\\src\\shaders\\vertex_shader.glsl";
   config.fragment_shader_path = "X:\\Side projects\\Platformer\\src\\shaders\\fragment_shader.glsl";
