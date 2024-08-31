@@ -3,3 +3,6 @@ build/
 
 # vcpkg dependencies
 vcpkg_installed/
+
+# cached files
+.cache
