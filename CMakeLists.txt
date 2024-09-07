@@ -4,7 +4,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Specify the source file locations
 file(GLOB SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-file(GLOB MODELS ${CMAKE_CURRENT_SOURCE_DIR}/src/models/*.cpp)
+file(GLOB_RECURSE MODELS ${CMAKE_CURRENT_SOURCE_DIR}/src/models/*.cpp)
 file(GLOB DEPENDENCIES ${CMAKE_CURRENT_SOURCE_DIR}/src/dep/*.cpp)
 file(GLOB LIBS ${CMAKE_CURRENT_SOURCE_DIR}/lib/*.a)
 set(SOURCES ${SRC} ${MODELS} ${DEPENDENCIES})

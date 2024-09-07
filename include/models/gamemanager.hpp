@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <models/shader_program_config.hpp>
 #include "GLFW/glfw3.h"
-#include "models/input.hpp"
+#include "models/input/input.hpp"
 
 class Gamemanager{
 public:

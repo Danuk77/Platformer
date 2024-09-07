@@ -1,6 +1,10 @@
-#include "models/game_object.hpp"
+#include "models/game_objects/drawable_object.hpp"
+#include "models/game_objects/transform.hpp"
 #include "models/shader.hpp"
 #include "models/shader_program_config.hpp"
+#include "models/game_objects/player.hpp"
+#include <memory>
+#include <utility>
 #define GLFW_USE_WIN32
 #include <models/gamemanager.hpp>
 #include <platformer.hpp>
@@ -22,11 +26,14 @@ int main() {
   config.shader_program_name = "test_shader";
   Gamemanager::load_shader(config);
 
-  GameObject test_background("test_background", glm::vec2(.0f, 0.0f), glm::vec2(800.0f, 600.0f), 0.0f, "background", "test_shader");
-  Gamemanager::current_scene.add_game_object(test_background);
+  // TODO: Wrap these logics around in a class, etc..
+  Transform background_transform(glm::vec2(.0f, .0f), glm::vec2(800.0f, 600.0f), 0.0f);
+  std::unique_ptr<DrawableObject> test_background_ptr = std::make_unique<DrawableObject>("test_background", background_transform, "test_shader", "background");
+  Gamemanager::current_scene.add_game_object(std::move(test_background_ptr));
 
-  GameObject test_object("test_object", glm::vec2(200.0f, 200.0f), glm::vec2(50.0f, 75.0f), 0.0f, "test_sprite", "test_shader");
-  Gamemanager::current_scene.add_game_object(test_object);
+  Transform player_transform(glm::vec2(200.0f, 200.0f), glm::vec2(50.0f, 75.0f), 0.0f);
+  std::unique_ptr<Player> player = std::make_unique<Player>("test_object", player_transform, "test_shader", "test_sprite");
+  Gamemanager::current_scene.add_game_object(std::move(player));
 
   generate_ground();
 
@@ -51,8 +58,9 @@ void generate_ground(){
       float y_pos = 500 + (j * ground_object_size);
       for(int i = 0; i < number_of_ground_objects; i++){
         float x_pos = i * ground_object_size;
-        GameObject test_ground("test_ground", glm::vec2(x_pos, y_pos), glm::vec2(16.0f, 16.0f), 0.0f, "test_ground", "test_shader");
-        Gamemanager::current_scene.add_game_object(test_ground);
+        Transform test_object_transform(glm::vec2(x_pos, y_pos), glm::vec2(16.0f, 16.0f), 0.0f);
+        std::unique_ptr<DrawableObject> test_object = std::make_unique<DrawableObject>("test_ground", test_object_transform, "test_shader", "test_ground");
+        Gamemanager::current_scene.add_game_object(std::move(test_object));
       }
   }
 }
