@@ -2,11 +2,14 @@
 #include "models/gamemanager.hpp"
 #include "models/shader.hpp"
 #include <platformer.hpp>
+#include <collisions/collisions.hpp>
 
 void game_loop(GLFWwindow *game_window){
   while(!glfwWindowShouldClose(game_window)){
     Clock::update_time();
+    execute_physics_cycle();
     Gamemanager::render_current_scene();
+
     glfwSwapBuffers(game_window);
     clear_screen();
     glfwPollEvents();

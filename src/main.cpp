@@ -1,3 +1,5 @@
+#include "models/scene.hpp"
+#define GLFW_USE_WIN32
 #include "models/game_objects/drawable_object.hpp"
 #include "models/game_objects/transform.hpp"
 #include "models/shader.hpp"
@@ -5,9 +7,10 @@
 #include "models/game_objects/player.hpp"
 #include <memory>
 #include <utility>
-#define GLFW_USE_WIN32
 #include <models/gamemanager.hpp>
 #include <platformer.hpp>
+#include <models/game_objects/scene_object.hpp>
+#include <models/hitboxes/box_hitbox.hpp>
 
 void enable_transparent_rendering();
 void generate_ground();
@@ -32,7 +35,8 @@ int main() {
   Gamemanager::current_scene.add_game_object(std::move(test_background_ptr));
 
   Transform player_transform(glm::vec2(200.0f, 200.0f), glm::vec2(50.0f, 75.0f), 0.0f);
-  std::unique_ptr<Player> player = std::make_unique<Player>("test_object", player_transform, "test_shader", "test_sprite");
+  BoxHitbox hitbox(player_transform.size.x, player_transform.size.y); 
+  std::unique_ptr<Player> player = std::make_unique<Player>("test_object", player_transform, "test_shader", "test_sprite", hitbox);
   Gamemanager::current_scene.add_game_object(std::move(player));
 
   generate_ground();
@@ -59,7 +63,8 @@ void generate_ground(){
       for(int i = 0; i < number_of_ground_objects; i++){
         float x_pos = i * ground_object_size;
         Transform test_object_transform(glm::vec2(x_pos, y_pos), glm::vec2(16.0f, 16.0f), 0.0f);
-        std::unique_ptr<DrawableObject> test_object = std::make_unique<DrawableObject>("test_ground", test_object_transform, "test_shader", "test_ground");
+        BoxHitbox hitbox(test_object_transform.size.x, test_object_transform.size.y); 
+        std::unique_ptr<SceneObject> test_object = std::make_unique<SceneObject>("test_ground", test_object_transform, "test_shader", "test_ground", hitbox);
         Gamemanager::current_scene.add_game_object(std::move(test_object));
       }
   }

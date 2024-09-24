@@ -14,5 +14,12 @@ std::vector<Input> InputReader::read_user_input(){
     current_frame_inputs.push_back(RIGHT);
   }
 
+  if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+    current_frame_inputs.push_back(UP);
+  }
+
+  if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+    current_frame_inputs.push_back(DOWN);
+  }
   return current_frame_inputs;
 }
