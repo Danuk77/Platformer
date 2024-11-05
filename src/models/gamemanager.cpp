@@ -8,6 +8,60 @@ std::unordered_map<std::string, Sprite> Gamemanager::loaded_sprites;
 std::unordered_map<std::string, Shader> Gamemanager::loaded_shaders;
 unsigned int Gamemanager::current_shader = 0;
 Scene Gamemanager::current_scene = Scene();
+GLFWwindow* Gamemanager::current_window;
+
+// Initialises GLFW and GLAD.
+GLFWwindow* Gamemanager::create_window()
+{
+    if (!glfwInit())
+    {
+        std::cout << "Failed to initialise GLFW" << std::endl;
+        return nullptr;
+    }
+
+    configure_opengl_version();
+
+    GLFWwindow *window = glfwCreateWindow(800, 600, "Platformer", nullptr, nullptr);
+
+    if (window == nullptr)
+    {
+        std::cout << "Couldn't create a GLFW window" << std::endl;
+        glfwTerminate();
+        return nullptr;
+    }
+
+    // Make this windows the current context
+    glfwMakeContextCurrent(window);
+
+    // Initialise GLAD
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return nullptr;
+    }
+
+    // Set the viewport of the opengl context (specifies how much of the window we will take)
+    glViewport(0, 0, 800, 600);
+
+    // Register the callback function 'freambuffer_size_callback' to handle window resizing
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    Gamemanager::current_window = window;
+    return window;
+}
+
+void Gamemanager::configure_opengl_version(){
+  // Specify the OpenGL versions
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+}
+
+// Callback function to handle the window resizing.
+void Gamemanager::framebuffer_size_callback(GLFWwindow *window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
 
 void Gamemanager::load_shader(
     ShaderProgramConfiguration shader_program_configuration) {
