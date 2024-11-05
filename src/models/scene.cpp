@@ -1,5 +1,6 @@
 #include "models/scene.hpp"
 #include <memory>
+#include <utility>
 #include <vector>
 
 void Scene::add_game_object(std::unique_ptr<DrawableObject> object){
@@ -11,7 +12,7 @@ void Scene::add_game_object(std::unique_ptr<SceneObject> object){
 }
 
 void Scene::add_game_object(std::unique_ptr<Player> object){
-  scene_collidable_objects.push_back(std::move(object));
+  player_object = std::move(object);
 }
 
 void Scene::render(){
@@ -26,6 +27,7 @@ void Scene::render(){
     (*collidable_object_iterator)->render();
   }
 
+  player_object->render();
 }
 
 int Scene::get_number_of_loaded_game_objects(){
