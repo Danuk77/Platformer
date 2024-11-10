@@ -39,6 +39,11 @@ int main() {
   std::unique_ptr<Player> player = std::make_unique<Player>("test_object", player_transform, "test_shader", "test_sprite", hitbox);
   Gamemanager::current_scene.add_game_object(std::move(player));
 
+  Transform collidable_object_transform(glm::vec2(300.0f, 300.0f), glm::vec2(50.0f, 50.0f), 0.0f);
+  BoxHitbox collidable_object_hitbox(collidable_object_transform.size.x, collidable_object_transform.size.y); 
+  std::unique_ptr<SceneObject> collidable_object = std::make_unique<SceneObject>("test_collision_object", collidable_object_transform, "test_shader", "test_ground", collidable_object_hitbox);
+  Gamemanager::current_scene.add_game_object(std::move(collidable_object));
+
   generate_ground();
 
   game_loop(game_window);

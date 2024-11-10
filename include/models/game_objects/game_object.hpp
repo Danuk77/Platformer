@@ -10,6 +10,5 @@ public:
   GameObject(std::string object_name, Transform transform);
   virtual void render() = 0;
   Transform transform;
-protected:
   std::string object_name;
 };
