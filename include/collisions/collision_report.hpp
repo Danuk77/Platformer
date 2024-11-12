@@ -9,6 +9,4 @@ public:
   bool is_colliding;
   float collision_depth_x;
   float collision_depth_y;
-
-private:
 };

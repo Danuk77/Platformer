@@ -1,5 +1,6 @@
 #include "collisions/collision_detection.hpp"
 #include "collisions/collision_report.hpp"
+#include "collisions/collision_resolution.hpp"
 #include "models/gamemanager.hpp"
 #include "models/scene.hpp"
 #include <collisions/collisions.hpp>
@@ -27,10 +28,11 @@ void narrow_phase(CollidableObjects &objects_to_check_collisions) {
       CollisionReport report = determine_collision_between_scene_objects(player_object, *collidable_object_pointer);
 
       if(report.is_colliding){
-          std::cout << "Is colliding " << report.is_colliding
-            << " collision depth x: " << report.collision_depth_x
-            << " collision depth y: " << report.collision_depth_y
-            << std::endl;
+        resolve_collision(player_object, report);
+        std::cout << "Is colliding " << report.is_colliding
+          << " collision depth x: " << report.collision_depth_x
+          << " collision depth y: " << report.collision_depth_y
+          << std::endl;
       }
     }
   }
